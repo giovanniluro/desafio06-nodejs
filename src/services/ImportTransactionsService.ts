@@ -11,7 +11,7 @@ class ImportTransactionsService {
       'utf-8',
     );
 
-    const lines = data.split('\n');
+    const lines = data.split('\r\n');
     lines.splice(0, 1);
 
     const transactionsQueue1 = lines.map(line => {
