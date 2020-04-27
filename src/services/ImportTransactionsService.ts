@@ -11,25 +11,20 @@ class ImportTransactionsService {
       'utf-8',
     );
 
-    console.log(data);
-
     const lines = data.split('\n');
     lines.splice(0, 1);
 
-    console.log(lines);
     const transactionsQueue1 = lines.map(line => {
       const [title, typeString, valueString, category] = line.split(', ');
       const type = typeString as 'income' | 'outcome';
       const value = Number(valueString);
       return { title, type, value, category };
     });
-    console.log(transactionsQueue1);
 
     const createTransactionService = new CreateTransactionService();
     const transactionsQueue = transactionsQueue1.filter(
       transaction => !!transaction.title,
     );
-    console.log(transactionsQueue);
     const transactions: Transaction[] = [];
     // eslint-disable-next-line no-restricted-syntax
     for (const transaction of transactionsQueue) {
